@@ -32,6 +32,33 @@ COPY ./nginx.default.conf /etc/nginx/conf.d/default.conf
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
 ```
+The `nginx.default.conf` file contains proxy configuration used to make API calls to the Flask container.
+#### nginx.default.conf
+```
+server {
+    listen       80;
+    server_name  localhost;
+
+    root   /usr/share/nginx/html;
+    index index.html;
+    error_page   500 502 503 504  /50x.html;
+
+    location / {
+        try_files $uri $uri/ =404;
+        add_header Cache-Control "no-cache";
+    }
+
+    location /static {
+        expires 1y;
+        add_header Cache-Control "public";
+    }
+
+    location /api {
+        proxy_pass http://flaskapp:5000; #using flask service as proxy pass
+    }
+}
+```
+### Building Containers via Docker Compose
 The Flask, React, and PostgreSQL containers are built using Docker Compose with the following configurations.
 ```
 version: '3'
