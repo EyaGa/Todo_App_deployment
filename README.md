@@ -4,7 +4,7 @@
 To ensure that the app can run seamlessly on various servers, i utilized Docker for deployment. Docker provides an isolated environment for the app, enhancing portability and security.
 
 ## Building Container Using Docker Compose
-Before creating containers, I created a Docker image for building the React and Flask images. The PostgreSQL image was built using Docker Compose. The Flask image utilized Python 3.10 as its base image, while the React image was built using multi-stage builds with node and nginx as base images
+Before creating containers, I created a Docker image for building the React and Flask images. The Flask image utilized Python 3.10 as its base image, while the React image was built using multi-stage builds with node and nginx as base images. 
 
 ### Flask Dockerfile
 ```
@@ -58,7 +58,7 @@ server {
     }
 }
 ```
-### Building Containers via Docker Compose
+### Docker Compose Configuration
 The Flask, React, and PostgreSQL containers are built using Docker Compose with the following configurations.
 ```
 version: '3'
