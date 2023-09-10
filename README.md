@@ -54,7 +54,7 @@ server {
     }
 
     location /api {
-        proxy_pass http://flaskapp:5000; #using flask service as proxy pass
+        proxy_pass http://flaskapp:5000; # using flask service as proxy pass
     }
 }
 ```
